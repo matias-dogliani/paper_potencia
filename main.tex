@@ -35,64 +35,7 @@
     En su mayoría, las diferentes topologías siguen un mismo procedimiento de diseño. Este trata de analizar al  conversor en sus dos modos de funcionamiento por separado, modo elevador y modo reductor de tensión. El diseño se realiza con este procedimiento mencionado, basado en el propuesto \cite{espinosa2017asynchronous} y siguiendo recomendaciones de \cite{haifengdesign} considerando al conversor en modo de conducción continua (CCM). 
        
       
-    El circuito propuesto es el de la figura \ref{fig: Esquematico BB }. En el momento que Q2 se encuentra apagado (circuito abierto) el conversor se encuentra en modo reductor o \textit{buck} y el voltaje de salida es regulado mediante Q1, y la relación entre voltaje de salida y de entrada está definida por la ecuación (\ref{ec: Vout de modo buck}), donde $D$ es el ciclo de trabajo de Q1. En este modo el voltaje de salida siempre será menor que el de entrada, ya que $D$ siempre se mantendrá menor a 1. 
-       
-       \begin{figure}[htbp]
-            \centering
-            \includegraphics[scale = 0.5]{Figuras/circuito_BB.png}
-            \caption{Conversor buck-boost propuesto }
-            \label{fig: Esquematico BB }
-        \end{figure}
-        
-        \begin{equation}
-            \frac{V_{out}}{V_{in}} = D 
-            \label{ec: Vout de modo buck}
-        \end{equation}
-        
-        Al mantener Q1 siempre encendido el circuito opera en modo elevador o \textit{boost} y la tensión de salida es regulada mediante el control de Q2. La relación de tensión de salida y de entrada se define según la expresión (\ref{ec: Vout de modo boost}).
-        
-        %SI ME SOBRA ESPACIO LE MANDO LAS CURVAS DE TENSION Y CORRIENTE DE SALIDA 
-        \begin{equation}
-            \frac{V_{out}}{V_{in}} = \frac{1}{1 - D} 
-            \label{ec: Vout de modo boost}
-        \end{equation}
-        
-        Para el diseño se tendrán en cuenta resistencias equivalentes de inductor y caídas de tensión en los diodos utilizados \cite{espinosa2017asynchronous}. Las ecuaciones anteriores se transforman, para cada modo respectivamente: 
-        
-        \begin{align}
-            V_{Obuck} & = \frac{V_{in} - 2V_d (1- D/2) }{ 1 + \frac{R_{ind}}{RL} + \frac{R_s}{RL}.D} \\ 
-            V_{Oboost} &= \frac{V_{in} - V_d (1-D)  }{ 1 - D + \frac{R_s}{RL} + \frac{R_{ind}}{R (1 - D) }}
-        \end{align}
-    
-        Donde: 
-        
-        $Rs$: Resistencia de conducción de MOSFET. 
-        
-        $R_{ind}$: Resistencia parásita del inductor 
-        
-        $V_d$: Caída de tensión en los diodos. 
-        
-        Para la elección del valor del inductor se tiene en cuenta que el la mínima inductancia necesaria en el modo \textit{boost} es mayor que la inductancia obtenida a partir del análisis en modo \textit{buck}, por lo que se elige esta primera que se puede calcular mediante la expresión (\ref{ec: inductor}) 
-        
-    \begin{equation}
-        L > \frac{ R \cdot D (1-D)^2 (1 + \tfrac{V_d}{V_o}) - \tfrac{R_s (1+D)}{RL} }{2f_s}
-        \label{ec: inductor}
-    \end{equation}
-    
-    Lo mismo sucede con el capacitor. Este brinda la corriente a la carga en el modo \textit{boost} por lo que el valor es mayor que el observado en el modo \textit{buck}. 
-    
-    \begin{equation}
-       C = \frac{D}{RL \cdot f_s \tfrac{\Delta V_o}{V_o}}
-        \label{ec: capacitor}
-    \end{equation}
-    
-    Acorde al comportamiento del inductor según su resistencia equivalente se elige un inductor con resistencia igual o menor a 0.1 $\Omega$. Se acepta un ripple en la tensión de salida de $5\%$ (con plena carga) y un transistor MOSFET con una resistencia de conducción menor a 0.02 $\Omega$. Para pruebas se considerará el panel solar antes mencionado. Para la carga se tendrá en cuenta una resistencia parásita de un sistemas de baterías típico, de valor aproximado a 0.2 $\Omega$. Los valores obtenidos son: 
-    
-    $L = $
-    
-    $C = $
-    
-    $R_L = $
+  
     
     
 
