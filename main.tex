@@ -14,7 +14,7 @@
     
     En las interfaces utilizadas entre las celdas fotovoltaicas y la carga domiciliaria (cargadores de baterías, luminaria DC, etc) podemos encontrar conversores de bajo costo pero así de también de una eficiencia reducida dado que el punto de operación de los paneles solares, en la mayoría de los casos, no es adecuado \cite{Chang}. Distintos tipos de conversores DC-DC son utilizados, donde cada uno presenta cierta deficiencia y o limitación en cuanto a la regulación de voltaje de entrada y salida, valor de carga, etc. Además el control de estos conversores de bajo costo se realiza con técnicas basadas en PWM. 
     
-    Considerando las características de los paneles PV, el voltaje de salida de los mismos varia ampliamente de acuerdo a la temperatura ambiente, radiación solar, tiempo de sombra, y otras condiciones climáticas como así también de parámetros inherentes de los mismos como conexión de celdas, cantidad de celdas,etc. Por lo que para lograr un voltaje estable y lograr una un punto de máxima potencia de trabajo, un conversor buck-boost se coloca entre los panales solares y las cargas de continua (i.e banco de baterías) y un control de rastreo de máximo punto de potencia  \cite{Chang} como puede observarse en la imagen (\ref{fig: Curva MPPT}), que pertenece al panel solar Siemens \textregistered \ modelo SM50-H
+    Considerando las características de los paneles PV, el voltaje de salida de los mismos varia ampliamente de acuerdo a la temperatura ambiente, radiación solar, tiempo de sombra, y otras condiciones climáticas como así también de parámetros inherentes de los mismos como conexión de celdas, cantidad de celdas,etc. Por lo que para lograr un voltaje estable y lograr una un punto de máxima potencia de trabajo, un conversor buck-boost se coloca entre los panales solares y las cargas de continua (i.e banco de baterías) y un control de rastreo de máximo punto de potencia \cite{Chang} como puede observarse en la imagen (\ref{fig: Curva MPPT}), que pertenece al panel solar \textregistered Siemens modelo SM50-H
     
         \begin{figure}[htbp]
             \centering
@@ -29,10 +29,33 @@
  
 \section{Diseño}
     
-    Se propone un conversor de tipo SEPIC \textit{single-ended primary-inductor converter} ya que posee, entre otras ventajas, ausencia de inversión de polaridad en la salida, bajo rizado de la corriente de entrada \cite{alvarez2019caracterizacion} y la utilización de un solo transistor MOSFET que facilitará la implementación del controlador en trabajos futuros. 
+    Se propone un conversor de tipo SEPIC \textit{single-ended primary-inductor converter} ya que posee, entre otras ventajas, ausencia de inversión de polaridad en la salida, bajo rizado de la corriente de entrada \cite{alvarez2019caracterizacion} y la utilización de un solo transistor MOSFET que facilitará la implementación del controlador en trabajos futuros. El circuito es el de la figura \ref{fig: Circuito sepic}
+    \begin{figure}
+        \centering
+      \includegraphics[scale = 0.25]{Figuras/Circuito_BB.png}
+        \caption{Circuito sepic}
+        \label{fig: Circuito sepic}
+    \end{figure}
        
-       
-    En su mayoría, las diferentes topologías siguen un mismo procedimiento de diseño. Este trata de analizar al  conversor en sus dos modos de funcionamiento por separado, modo elevador y modo reductor de tensión. El diseño se realiza con este procedimiento mencionado, basado en el propuesto \cite{espinosa2017asynchronous} y siguiendo recomendaciones de \cite{haifengdesign} considerando al conversor en modo de conducción continua (CCM). 
+      
+    En su mayoría, las diferentes topologías siguen un mismo procedimiento de diseño. Este trata de analizar al  conversor en sus dos modos de funcionamiento por separado, modo elevador y modo reductor de tensión. El diseño se realiza con este procedimiento mencionado, siguiendo lineamientos de \cite{espinosa2017asynchronous} y recomendaciones de notas de aplicación \cite{haifengdesign} y \cite{falin2008designing} considerando al conversor en modo de conducción continua (CCM). 
+    
+    Cuando el transistor Q1 se encuentra encendido (ON) 
+    
+    
+    capacitor C P is charged to the input voltage,
+V IN . Knowing this, we can easily determine
+the voltages as shown in Figure 3.
+When Q1 is off, the voltage across L1b
+must be V OUT . Since C IN is charged to V IN ,
+the voltage across Q1 when Q1 is off is V IN +
+V OUT , so the voltage across L1a is V OUT . When
+Q1 is on, capacitor C P , charged to V IN , is con-
+nected in parallel with L1b, so the voltage
+across L1b is –V IN .
+    
+    
+    
        
       
   
@@ -44,6 +67,13 @@
     Explico un poco qwue se obtuvo y meto algunas curvas 
     
     Este circuito será parte de un sistema complejo como el que puede verse en la figura ... 
+    
+Presenta una fácil implementación y
+aislamiento galvánico entre la entrada y la salida, y un menor rizado de corriente
+de entrada a altas frecuencias. Sin embargo, una mejora de este circuito puede
+ser obtenida acoplando los dos inductores vistos bajo un mismo núcleo, teniendo
+la posibilidad de aumentar la eficiencia en un 2 y reduciendo la emisión de ruido
+EMI, lo que conlleva a simplificar el filtro de entrada del convertidor.\cite{rios2017sistema}
  
 \section{Conclusión}
 
