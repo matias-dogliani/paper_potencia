@@ -66,24 +66,18 @@
     
     \section{Determinación de elementos pasivos}
     
-    Para el diseño se consideran rangos determinados típicos de paneles solares utilizados y como carga un sistema de batería, aunque cabe destacar que el circuito será controlado para conservar la eficiencia de estas condiciones aún cuando las mismas sean diferentes en pequeña medida. Se considera el panel mencionado \cite{PV_datasheet}. La carga se considera de un valor aproximado de 5 $\Omega$ y que puede recibir el total de la potencia. 
-    
+    Para el diseño se consideran rangos determinados típicos de paneles solares utilizados y como carga un banco de batería de 12~V, aunque cabe destacar que el circuito será controlado para conservar la eficiencia de estas condiciones aún cuando las mismas sean diferentes en pequeña medida, factor importante para no olvidar que la selección de los componentes debe realizarse considerando condiciones de plena carga y máxima potencia de transferencia. Se considera el panel mencionado \cite{PV_datasheet}. 
         \subsection{Ciclo de trabajo}
         
-         Considerando un rango de variación de irradiación recibida entre $20\%$ y $100\%$  la potencia producida por las celdas estará entre 10~W y 50~W. Y la corriente del punto máximo de potencia variará en la misma medida entre 0.63~A y 3.15~A. La resistencia de entrada mínima y máxima estarán determinadas por estos valores, que definirán la ganancia necesaria del circuito. 
+         Considerando un rango de variación de irradiación recibida entre $20\%$ y $100\%$  la potencia producida por las celdas estará entre 10~W y 50~W aproximadamente, y la tensión de entrada variará entre 8 y 16. Y la corriente del punto máximo de potencia variará en la misma medida entre 0.63~A y 3.15~A. La resistencia de entrada mínima y máxima estarán determinadas por estos valores, que definirán la ganancia necesaria del circuito \cite{atia2009photovoltaic}
  
             \begin{align}
                 M_{min} &= \sqrt{\frac{R_L}{R_{in_{M}}}} \\
                 M_{max} &= \sqrt{\frac{R_L}{R_{in_{m}}}}
             \end{align}
        
-        El ciclo de trabajo mínimo se calculará según la expresión , y el ciclo de trabajo máximo según . Los valores obtenidos, para estas condiciones particulares, son : 
-        
-            $D_{min} = 0.16$
-            
-            $D_{max} = 0.5$
-        
-        
+        El ciclo de trabajo mínimo se calculará según la expresión \ref{ec: D minimo} , y el ciclo de trabajo máximo según \ref{ec: D maximo} . Se puede calcular solo el ciclo de trabajo máximo, según la simple expresión de \cite{falin2008designing} teniendo en cuenta la función de transferencia del circuito. 
+           
             \begin{align}
                 D_{min} &= \frac{M_{min}}{ 1 + M_{min}} \label{ec: D minimo} \\
                 D_{max} &= \frac{M_{max}}{ 1 + M_{max}} \label{ec: D maximo}
