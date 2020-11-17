@@ -41,7 +41,7 @@
     En su mayoría, las diferentes topologías siguen un mismo procedimiento de diseño. Este trata de analizar al  conversor en sus dos modos de funcionamiento por separado, modo elevador y modo reductor de tensión. El diseño se realiza con este procedimiento mencionado, siguiendo lineamientos de \cite{espinosa2017asynchronous} y recomendaciones de notas de aplicación \cite{haifengdesign} y \cite{falin2008designing} considerando al conversor en modo de conducción continua (CCM). 
     
     
-    Cuando el transistor Q1 se encuentra encendido (ON) el diodo se encuentra en estado de bloqueo (sin importar el valor de $V_{in}$ o $V_{out}$, en este estado, la tensión en el diodo es negativa) y el capacitor $C_p$ se carga a la tensión de entrada y la tensión en $L_2$ es la misma pero de polaridad invertida. Cuanto el transistor Q1 se encuentra apagado (OFF) el diodo comienza a conducir manteniendo la continuidad de corrientes en los inductores. La tensión en el inductor $L_2 = L_{1b}$ es igual a la tensión de salida invertida $-V_{out}$ (considerando la caída en el diodo como nula) y la tensión el inductor $L_1 = L_{1a}$ será la tensión $V_{in} - V_{C_p} - V_{out}$. Siguiendo estos modos se pueden obtener las curvas de tensión y corriente de cada elemento, como se representa de forma aproximada en la figura 
+    Cuando el transistor Q1 se encuentra encendido (ON) el diodo se encuentra en estado de bloqueo (sin importar el valor de $V_{in}$ o $V_{out}$, en este estado, la tensión en el diodo es negativa) y el capacitor $C_p$ se carga a la tensión de entrada y la tensión en $L_2$ es la misma pero de polaridad invertida. Cuanto el transistor Q1 se encuentra apagado (OFF) el diodo comienza a conducir manteniendo la continuidad de corrientes en los inductores. La tensión en el inductor $L_2 = L_{1b}$ es igual a la tensión de salida invertida $-V_{out}$ (considerando la caída en el diodo como nula) y la tensión el inductor $L_1 = L_{1a}$ será la tensión $V_{in} - V_{C_p} - V_{out}$. Siguiendo estos modos se pueden obtener las curvas de tensión y corriente de cada elemento, como se representa de forma aproximada en la figura \ref{fig: Curvas IV} 
   
     \begin{figure}[H]
             \centering
@@ -54,7 +54,7 @@
             \centering
              \includegraphics[scale = 0.25]{Figuras/curvas_BB.png}
             \caption{Curvas de corriente y tensión}
-            \label{fig: Circuito sepic}
+            \label{fig: Curvas IV}
       \end{figure}
   
     Considerando a los elementos como ideales, la función de transferencia del circuito está definida por la expresión \ref{ec: funcion de transferencia}
@@ -89,7 +89,7 @@
   
         \subsection{Inductor}
         
-            Los inductores $L_1$ y $L_2$ están relacionado con la frecuencia de conmutación del transistor. Para poder implementar un controlador MPPT es necesario cuidar las posibles oscilaciones alrededor del punto óptimo, por lo que es recomendado optar por un ripple de corriente relativamente pequeño \cite{atia2009photovoltaic} ($2\%$) de la mayor corriente. La decisión del factor de ripple que se permitirá es un factor determinante para la elección de todos los componentes y una regla práctica es considerarlo entre un $20$ y $40\% $ \cite{falin2008designing}. Se considera un $30\%$ de la corriente de entrada efectiva \cite{kaouane2015design}. 
+            Los inductores $L_1$ y $L_2$ están relacionado con la frecuencia de conmutación del transistor. Para poder implementar un controlador MPPT es necesario cuidar las posibles oscilaciones alrededor del punto óptimo, por lo que es recomendado optar por un ripple de corriente relativamente pequeño \cite{atia2009photovoltaic}de la mayor corriente. La decisión del factor de ripple que se permitirá es un factor determinante para la elección de todos los componentes y una regla práctica es considerarlo entre un $20$ y $40\% $ de la corriente que por este circula \cite{falin2008designing}. Se considera un $30\%$ de la corriente de entrada efectiva \cite{kaouane2015design}. 
             
             El valor de los mismos se calcula con la ecuación \ref{ec: Calculo de inductores}: 
             
@@ -131,7 +131,7 @@
             \label{fig: Circuito simulación}
       \end{figure}
     
-    Para una tensión de entrada $V_{i_min}$ se puede observar en las curvas de la figura \ref{fig:Curvas Vin9V}  que se obtiene una salida $V_{out} \approx 12~V$ utilizando el ciclo de trabajo $D_{max} = 0.61$ calculado anteriormente. Esto comprueba la capacidad del circuito en mantener una tensión de salida al nivel deseado. 
+    Para una tensión de entrada $V_{i_{min}}$ se puede observar en las curvas de la figura \ref{fig:Curvas Vin9V}  que se obtiene una salida $V_{out} \approx 12~V$ utilizando el ciclo de trabajo $D_{max} = 0.61$ calculado anteriormente. Esto comprueba la capacidad del circuito en mantener una tensión de salida al nivel deseado. 
     
     \begin{figure}[htbp]
             \centering
@@ -140,7 +140,7 @@
             \label{fig:Curvas Vin9V}
       \end{figure}
     
-    En la figura se puede apreciar el ripple de la tensión de salida, para la entrada de tensión mínima. Este valor logrado es totalmente aceptable
+    En la figura \ref{fig: Ripple de salida} se puede apreciar el ripple de la tensión de salida, para la entrada de tensión mínima. Este valor logrado es totalmente aceptable
     
     \begin{figure}[htbp]
             \centering
