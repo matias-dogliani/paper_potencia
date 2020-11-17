@@ -76,33 +76,42 @@
                 M_{max} &= \sqrt{\frac{R_L}{R_{in_{m}}}}
             \end{align}
        
-        El ciclo de trabajo mínimo se calculará según la expresión \ref{ec: D minimo} , y el ciclo de trabajo máximo según \ref{ec: D maximo} . Se puede calcular solo el ciclo de trabajo máximo, según la simple expresión de \cite{falin2008designing} teniendo en cuenta la función de transferencia del circuito. 
+        El ciclo de trabajo mínimo se calculará según la expresión \ref{ec: D minimo} , y el ciclo de trabajo máximo según \ref{ec: D maximo} . Se puede calcular solo el ciclo de trabajo máximo, que ocurre cuando la tensión de entrada es mínima, según la simple expresión de \cite{falin2008designing} teniendo en cuenta la función de transferencia del circuito. 
+        
+        $D_{max} = \frac{12~V +0.6V}{8 +0.6 + 12} = 0.61$
            
             \begin{align}
                 D_{min} &= \frac{M_{min}}{ 1 + M_{min}} \label{ec: D minimo} \\
                 D_{max} &= \frac{M_{max}}{ 1 + M_{max}} \label{ec: D maximo}
             \end{align}
       
+        
   
         \subsection{Inductor}
         
-            Los inductores $L_1$ y $L_2$ están relacionado con la frecuencia de conmutación del transistor. Para poder implementar un controlador MPPT es necesario cuidar las posibles oscilaciones alrededor del punto óptimo, por lo que es recomendado optar por un ripple de corriente relativamente pequeño \cite{atia2009photovoltaic} ($2\%$) de la mayor corriente. El valor de los mismos se calcula con la ecuación \ref{ec: Calculo de inductores}: 
+            Los inductores $L_1$ y $L_2$ están relacionado con la frecuencia de conmutación del transistor. Para poder implementar un controlador MPPT es necesario cuidar las posibles oscilaciones alrededor del punto óptimo, por lo que es recomendado optar por un ripple de corriente relativamente pequeño \cite{atia2009photovoltaic} ($2\%$) de la mayor corriente. La decisión del factor de ripple que se permitirá es un factor determinante para la elección de todos los componentes y una regla práctica es considerarlo entre un $20$ y $40\% $ \cite{falin2008designing}. Se considera un $30\%$ de la corriente de entrada efectiva \cite{kaouane2015design}. 
             
-            $L_1 = L_2 = 1.26~\mathrm{mH}$
+            El valor de los mismos se calcula con la ecuación \ref{ec: Calculo de inductores}: 
+            
+            $L_1 = L_2 =23~\mathrm{mH}$
             
             \begin{equation}
                 L_1 = L_2 = \frac{V_{in_{min}}}{2\Delta I_L \cdot f_s} \times D_{max} 
                 \label{ec: Calculo de inductores}
             \end{equation}
+            
+            Se considera inductores acoplados entre ellos ya que esto mejora aún más la eficiencia del circuito \cite{espinosa2017asynchronous}. 
     
         \subsection{Capacitores}
             
+            Cuando el transistor Q1 está encendido el capacitor de salida debe proveer a la carga la corriente necesaria. Este debe contar con la suficiente capacitancia y la menor posible ESR, para cumplir con los requerimientos del \textit{ripple} de voltaje de salida, cuidando también que soporte la corriente de salida máxima. 
+            
             Para calcular el capacitor de salida es válido considerar al circuito como un conversor \textit{boost} convencional (ya que es idéntica la etapa de salida). De esta forma, utilizando la expresión \ref{ec : Capacitor de salida }\cite{falin2008designing}, se obtiene aproximadamente: 
             
-            $C_{out} = 100~\mu F$
+            $C_{out} = 122~\mu F$
             
             \begin{equation}
-                C_{out} = \frac{I_{out}D_{max}T_s}{\Delta V_{out}}
+                C_{out} \geq \frac{I_{out}D_{max}T_s}{\Delta V_{out}}
                 \label{ec : Capacitor de salida }
             \end{equation}
         
