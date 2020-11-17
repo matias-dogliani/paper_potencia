@@ -176,9 +176,36 @@
             \label{fig: transitorio Vout}
       \end{figure}
    
+   
+   Al cambiar la carga el transitorio aumenta al igual que el ripple en la tensión de salida como se observa en la figura \ref{fig: transitorio Vout carga menor}
+   
+   
+     \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.27]{Figuras/Vout_R1.png}
+            \caption{ Transitorio de tensión de salida con carga menor }
+            \label{fig: transitorio Vout carga menor}
+      \end{figure}
+   
+   Este circuito es parte de un sistema de mayor complejidad como el de la figura \ref{fig: PVControl} en donde se aplicará un control basado en el algoritmo MPPT para obtener una gran eficiencia de transferencia de potencia. Es por ello que se eligió esta topología por ser de fácil control. 
+   
+    \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.35]{Figuras/Diagrama1.png}
+            \caption{ Regulador para paneles solares}
+            \label{fig: PVControl}
+      \end{figure}
+
     
-    Este circuito será parte de un sistema complejo como el que puede verse en la figura ... 
+ 
     
+
+\section{Conclusión}
+
+Trabajo a futuro. Diseño de convertidor multifase para mejorar la eficiencia. 
+Eficiencia obtenida? 
+Como se menicona en tal paper la eficiencia de este tipo podrìa ser mejorada, Ademas los componentes en modo boost sufren stress ... 
+
 Presenta una fácil implementación y
 aislamiento galvánico entre la entrada y la salida, y un menor rizado de corriente
 de entrada a altas frecuencias. Sin embargo, una mejora de este circuito puede
@@ -194,12 +221,6 @@ switching cycle. Using a coupled inductor takes up
 less space on the printed circuit board (PCB) and
 tends to be lower cost than two separate inductors.
  
-\section{Conclusión}
-
-Trabajo a futuro. Diseño de convertidor multifase para mejorar la eficiencia. 
-Eficiencia obtenida? 
-Como se menicona en tal paper la eficiencia de este tipo podrìa ser mejorada, Ademas los componentes en modo boost sufren stress ... 
-
 
 
 
