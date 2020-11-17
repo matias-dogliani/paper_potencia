@@ -25,14 +25,14 @@
     
     Existen diversas topologías para el conversor propuesto. En \cite{Kiran} se propone un conversor con un solo transistor y  de \textit{soft switching}, en \cite{9106477} un circuito de alta eficiencia, de diseño complejo por la cantidad de inductores; en \cite{5701795} se propone un conversor de topología convencional junto con su controlador analógico para una variación de entrada determinada; y en \cite{6119227} un conversor que combina topología KY y Buck para lograr un conversor estable. En \cite{954206} se puede observar comparaciones entre algunas topologías. En este trabajo se propone un conversor de simple implementación, bajo costo y eficiencia aceptable, con modo de funcionamiento de conducción continua, para ser controlado a través de un microcontrolador como se realiza en \cite{Chang}. De esta forma, en conjunto con sensores de corrientes y tensión, se podrá lograr un conversor y regulador para cargas variables, y configuraciones de paneles diferentes, configurables a través de una interfaz.
  
-    EXPLICAR DIVISION DE TRABAJO 
+    La topología propuesta se presenta en la sección de diseño junto con un análisis general del mismo. En la sección de determinación de componentes se contempla las condiciones de trabajo para un caso determinado típico y expresiones para encontrar los valores críticos de componentes pasivos. En resultado, finalmente, se muestran las curvas de tensión de entrada y salida. 
  
 \section{Diseño}
     
     Se propone un conversor de tipo SEPIC \textit{single-ended primary-inductor converter} ya que posee, entre otras ventajas, ausencia de inversión de polaridad en la salida, bajo rizado de la corriente de entrada \cite{alvarez2019caracterizacion} y la utilización de un solo transistor MOSFET que facilitará la implementación del controlador en trabajos futuros. El circuito es el de la figura \ref{fig: Circuito sepic}
     \begin{figure}
         \centering
-      \includegraphics[scale = 0.25]{Figuras/Circuito_BB.png}
+         \includegraphics[scale = 0.25]{Figuras/Circuito_BB.png}
         \caption{Circuito sepic}
         \label{fig: Circuito sepic}
     \end{figure}
@@ -40,28 +40,82 @@
       
     En su mayoría, las diferentes topologías siguen un mismo procedimiento de diseño. Este trata de analizar al  conversor en sus dos modos de funcionamiento por separado, modo elevador y modo reductor de tensión. El diseño se realiza con este procedimiento mencionado, siguiendo lineamientos de \cite{espinosa2017asynchronous} y recomendaciones de notas de aplicación \cite{haifengdesign} y \cite{falin2008designing} considerando al conversor en modo de conducción continua (CCM). 
     
-    Cuando el transistor Q1 se encuentra encendido (ON) 
     
-    
-    capacitor C P is charged to the input voltage,
-V IN . Knowing this, we can easily determine
-the voltages as shown in Figure 3.
-When Q1 is off, the voltage across L1b
-must be V OUT . Since C IN is charged to V IN ,
-the voltage across Q1 when Q1 is off is V IN +
-V OUT , so the voltage across L1a is V OUT . When
-Q1 is on, capacitor C P , charged to V IN , is con-
-nected in parallel with L1b, so the voltage
-across L1b is –V IN .
-    
-    
-    
+    Cuando el transistor Q1 se encuentra encendido (ON) el diodo se encuentra en estado de bloqueo (sin importar el valor de $V_{in}$ o $V_{out}$, en este estado, la tensión en el diodo es negativa) y el capacitor $C_p$ se carga a la tensión de entrada y la tensión en $L_2$ es la misma pero de polaridad invertida. Cuanto el transistor Q1 se encuentra apagado (OFF) el diodo comienza a conducir manteniendo la continuidad de corrientes en los inductores. La tensión en el inductor $L_2 = L_{1b}$ es igual a la tensión de salida invertida $-V_{out}$ (considerando la caída en el diodo como nula) y la tensión el inductor $L_1 = L_{1a}$ será la tensión $V_{in} - V_{C_p} - V_{out}$. Siguiendo estos modos se pueden obtener las curvas de tensión y corriente de cada elemento, como se representa de forma aproximada en la figura 
+  
+    \begin{figure}[H]
+            \centering
+          \includegraphics[scale = 0.25]{Figuras/Modos_BB.png}
+            \caption{Circuitos equivalentes para cada modo \cite{falin2008designing}}
+            \label{fig: Circuito sepic}
+      \end{figure}
        
+     \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.25]{Figuras/curvas_BB.png}
+            \caption{Curvas de corriente y tensión}
+            \label{fig: Circuito sepic}
+      \end{figure}
+  
+    Considerando a los elementos como ideales, la función de transferencia del circuito está definida por la expresión \ref{ec: funcion de transferencia}
+    
+    \begin{equation}
+        \frac{V_{out}}{V_{in}} = \frac{D}{1-D} = M 
+        \label{ec: funcion de transferencia}
+    \end{equation}
+    
+    \section{Determinación de elementos pasivos}
+    
+    Para el diseño se consideran rangos determinados típicos de paneles solares utilizados y como carga un sistema de batería, aunque cabe destacar que el circuito será controlado para conservar la eficiencia de estas condiciones aún cuando las mismas sean diferentes en pequeña medida. Se considera el panel mencionado \cite{PV_datasheet}. La carga se considera de un valor aproximado de 5 $\Omega$ y que puede recibir el total de la potencia. 
+    
+        \subsection{Ciclo de trabajo}
+        
+         Considerando un rango de variación de irradiación recibida entre $20\%$ y $100\%$  la potencia producida por las celdas estará entre 10~W y 50~W. Y la corriente del punto máximo de potencia variará en la misma medida entre 0.63~A y 3.15~A. La resistencia de entrada mínima y máxima estarán determinadas por estos valores, que definirán la ganancia necesaria del circuito. 
+ 
+            \begin{align}
+                M_{min} &= \sqrt{\frac{R_L}{R_{in_{M}}}} \\
+                M_{max} &= \sqrt{\frac{R_L}{R_{in_{m}}}}
+            \end{align}
+       
+        El ciclo de trabajo mínimo se calculará según la expresión , y el ciclo de trabajo máximo según . Los valores obtenidos, para estas condiciones particulares, son : 
+        
+            $D_{min} = 0.16$
+            
+            $D_{max} = 0.5$
+        
+        
+            \begin{align}
+                D_{min} &= \frac{M_{min}}{ 1 + M_{min}} \label{ec: D minimo} \\
+                D_{max} &= \frac{M_{max}}{ 1 + M_{max}} \label{ec: D maximo}
+            \end{align}
       
   
+        \subsection{Inductor}
+        
+            Los inductores $L_1$ y $L_2$ están relacionado con la frecuencia de conmutación del transistor. Para poder implementar un controlador MPPT es necesario cuidar las posibles oscilaciones alrededor del punto óptimo, por lo que es recomendado optar por un ripple de corriente relativamente pequeño \cite{atia2009photovoltaic} ($2\%$) de la mayor corriente. El valor de los mismos se calcula con la ecuación \ref{ec: Calculo de inductores}: 
+            
+            $L_1 = L_2 = 1.26~\mathrm{mH}$
+            
+            \begin{equation}
+                L_1 = L_2 = \frac{V_{in_{min}}}{2\Delta I_L \cdot f_s} \times D_{max} 
+                \label{ec: Calculo de inductores}
+            \end{equation}
     
-    
-
+        \subsection{Capacitores}
+            
+            Para calcular el capacitor de salida es válido considerar al circuito como un conversor \textit{boost} convencional (ya que es idéntica la etapa de salida). De esta forma, utilizando la expresión \ref{ec : Capacitor de salida }\cite{falin2008designing}, se obtiene aproximadamente: 
+            
+            $C_{out} = 100~\mu F$
+            
+            \begin{equation}
+                C_{out} = \frac{I_{out}D_{max}T_s}{\Delta V_{out}}
+                \label{ec : Capacitor de salida }
+            \end{equation}
+        
+            El capacitor de entrada y de aislación $C_p$ no poseen un valor crítico, solo se debe cuidar que puedan soportar potencia que deba circular a través de ellos. Y lo mismo con el diodo, debiendo soportar además el máximo voltaje en reversa y los picos repetitivos de tensión.
+        
+        
+        
 \section{Resultados}
  
     Explico un poco qwue se obtuvo y meto algunas curvas 
@@ -74,6 +128,14 @@ de entrada a altas frecuencias. Sin embargo, una mejora de este circuito puede
 ser obtenida acoplando los dos inductores vistos bajo un mismo núcleo, teniendo
 la posibilidad de aumentar la eficiencia en un 2 y reduciendo la emisión de ruido
 EMI, lo que conlleva a simplificar el filtro de entrada del convertidor.\cite{rios2017sistema}
+
+.
+The
+two inductors can be wound on the same core since
+the same voltages are applied to them throughout the
+switching cycle. Using a coupled inductor takes up
+less space on the printed circuit board (PCB) and
+tends to be lower cost than two separate inductors.
  
 \section{Conclusión}
 
