@@ -100,7 +100,7 @@
                 \label{ec: Calculo de inductores}
             \end{equation}
             
-            Se considera inductores acoplados entre ellos ya que esto mejora aún más la eficiencia del circuito \cite{espinosa2017asynchronous}. 
+            Se considera inductores acoplados entre ellos ya que esto mejora aún más la eficiencia del circuito \cite{rios2017sistema}
     
         \subsection{Capacitores}
             
@@ -121,7 +121,61 @@
         
 \section{Resultados}
  
-    Explico un poco qwue se obtuvo y meto algunas curvas 
+ 
+    Con los componentes antes calculados se realizaron una serie de simulaciones para comprobar el comportamiento del circuito. El circuito que se utilizó en la simulación es el de la figura \ref{fig: Circuito simulación}. 
+    
+     \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.3]{Figuras/Circuito_simulacion.png}
+            \caption{Simulación en LTSpice}
+            \label{fig: Circuito simulación}
+      \end{figure}
+    
+    Para una tensión de entrada $V_{i_min}$ se puede observar en las curvas de la figura \ref{fig:Curvas Vin9V}  que se obtiene una salida $V_{out} \approx 12~V$ utilizando el ciclo de trabajo $D_{max} = 0.61$ calculado anteriormente. Esto comprueba la capacidad del circuito en mantener una tensión de salida al nivel deseado. 
+    
+    \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.3]{Figuras/Curvas_Vin9V.png}
+            \caption{$V_{in_{min}}$, $V_{out}$ y $D_{max}$}
+            \label{fig:Curvas Vin9V}
+      \end{figure}
+    
+    En la figura se puede apreciar el ripple de la tensión de salida, para la entrada de tensión mínima. Este valor logrado es totalmente aceptable
+    
+    \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.3]{Figuras/rippleVin9.png}
+            \caption{ Ripple de salida $\Delta V_{out}$ }
+            \label{fig: Ripple de salida}
+      \end{figure}
+    
+    
+   Para una tensión de entrada máxima para el caso particular considerado se puede observar las curvas de la figura \ref{fig:Curvas Vin16V}  .En este caso también el ripple de la tensión de salida es acorde al valor esperado según el diseño (fig. \ref{fig: Ripple de salida VinMax})
+   
+    \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.3]{Figuras/Curvas_Vin16V.png}
+            \caption{$V_{in_{max}}$, $V_{out}$ y $D_{max}$}
+            \label{fig:Curvas Vin16V}
+      \end{figure}
+      
+      \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.3]{Figuras/rippleVin16V.png}
+            \caption{ Ripple de salida $\Delta V_{out}$ con $V_{in_{max}}$ }
+            \label{fig: Ripple de salida VinMax}
+      \end{figure}
+   
+   
+    El comportamiento dinámico de este circuito es pobre (fig. ). Posee un tiempo de crecimiento relativamente grande. Esto se podrá mejorar en trabajos futuros pero se buscará siempre cuidar la estabilidad del mismo y no priorizar la rapidez, ya que las condiciones de trabajo del panel solar no cambian de forma drástica (aunque sí lo puede hacer la carga). 
+    
+    \begin{figure}[htbp]
+            \centering
+             \includegraphics[scale = 0.3]{Figuras/Transitorio_Vin9V.png}
+            \caption{ Transitorio de tensión de salida }
+            \label{fig: transitorio Vout}
+      \end{figure}
+   
     
     Este circuito será parte de un sistema complejo como el que puede verse en la figura ... 
     
@@ -130,7 +184,7 @@ aislamiento galvánico entre la entrada y la salida, y un menor rizado de corrie
 de entrada a altas frecuencias. Sin embargo, una mejora de este circuito puede
 ser obtenida acoplando los dos inductores vistos bajo un mismo núcleo, teniendo
 la posibilidad de aumentar la eficiencia en un 2 y reduciendo la emisión de ruido
-EMI, lo que conlleva a simplificar el filtro de entrada del convertidor.\cite{rios2017sistema}
+EMI, lo que conlleva a simplificar el filtro de entrada del convertidor.
 
 .
 The
